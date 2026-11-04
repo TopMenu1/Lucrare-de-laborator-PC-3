@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+
+    printf("Introduceti numarul de elemente n (n > 1): ");
+    if (scanf("%d", &n) != 1 || n <= 1) {
+        printf("Numar invalid de elemente. Trebuie n > 1.\n");
+        return 1;
+    }
+
+    double arr[n];
+
+    printf("Introduceti cele %d elemente ale tabloului:\n", n);
+    for (int i = 0; i < n; i++) {
+        printf("arr[%d] = ", i);
+        scanf("%lf", &arr[i]);
+    }
+
+    double max_val = arr[0];
+    int pos_prima = 0;
+    int pos_ultima = 0;
+
+    double suma_pozitive = 0.0;
+    int nr_pozitive = 0;
+
+    for (int i = 0; i < n; i++) {
+
+        if (arr[i] > max_val) {
+            max_val = arr[i];
+            pos_prima = i;
+            pos_ultima = i;
+        } else if (arr[i] == max_val) {
+            pos_ultima = i;
+        }
+
+        if (arr[i] > 0) {
+            suma_pozitive += arr[i];
+            nr_pozitive++;
+        }
+    }
+
+    printf("\n=== Rezultate ===\n");
+    printf("Valoarea maximala: %.2lf\n", max_val);
+    printf("Primul element maxim: index %d (pozitia %d)\n", pos_prima, pos_prima + 1);
+    printf("Ultimul element maxim: index %d (pozitia %d)\n", pos_ultima, pos_ultima + 1);
+
+    if (nr_pozitive > 0) {
+        double media = suma_pozitive / nr_pozitive;
+        printf("Media aritmetica a elementelor pozitive (%d elemente): %.2lf\n", nr_pozitive, media);
+    } else {
+        printf("Nu exista elemente pozitive (strict mai mari ca 0) in tablou.\n");
+    }
+
+    return 0;
+}
